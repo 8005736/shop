@@ -114,7 +114,7 @@ body {
 }
 .cart {
     &-item {
-        width: 300px;
+        width: 500px;
         margin: 0 auto 10px;
         display: block;
         &-title {
@@ -139,5 +139,13 @@ body {
                 background: lighten(@black, 70%);
             }
         }
+		
+		&-count {
+			display: inline-block;
+		}
+		
+		&-remove {
+			float: right;
+		}
     }
 }
