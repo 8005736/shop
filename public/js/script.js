@@ -4,6 +4,32 @@ var shop = {
     }
 }
 $(document).ready(function() {
+	//Для изменения количества
+	$("[name=product_count]").change(function(e) {
+		var current = $(this);
+		var count = +current.val();
+		if (count <= 0) {
+			var item = current.closest(".cart-item");
+			var input = item.find(".cart-item-delete");
+			var form = input.closest("form");
+			form.submit();
+		}
+		
+		var form = current.closest("form");
+        var data = form.serialize();
+		var id = form.find("input[name='product_id']").val();
+        var url = form.attr("action");
+        $.ajax({
+            url: url + "/" + id,
+            type: 'POST',
+            data: data
+        }).always(function(data) {
+            var result = JSON.parse(data);
+            shop.message(result.text);
+        });
+	});
+	
+
     $(".product-item form").submit(function(event) {
         event.preventDefault();
         var data = $(this).serialize();

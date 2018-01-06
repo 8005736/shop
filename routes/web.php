@@ -6,6 +6,7 @@ Route::get('/text', function(){
 });
 Route::get('/cart',	'CartController@index');
 Route::post('/cart', 'CartController@store');
+Route::post('/cart/change/{id}', 'CartController@change');
 Route::delete('/cart/{id}', 'CartController@destroy');
 Route::resources([
     'products' => 'ProductController',

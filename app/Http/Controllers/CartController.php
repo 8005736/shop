@@ -15,13 +15,16 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::all();
+        $cart = Cart::groupby("product_id")->get();
+		$products = array();
+		
         foreach ($cart as $key => $value) {
             $cid = $value->id;
             if ($product = Product::find($value->product_id)){
                 $products[$cid] = $product;
                 // добавляем ключ, чтобы удалять только один товар
                 $products[$cid]["cart_id"] = $cid;
+				$products[$cid]["count"] = $value["count"];
             }
         }
         return view('cart',
@@ -50,11 +53,18 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-
-        $cart = new Cart();
-        //$product = Product::findOrFail($request->product_id);
-        $cart->product_id = $request->product_id;
-        $cart->save();
+		$product = Cart::where("product_id",$request->product_id)->first();
+		
+		//Если в корзине уже есть такой товар
+		if ($product) {
+			$count = $product->count;
+			$product->count = $count+1;
+			$product->save();
+		} else {
+			$cart = new Cart();
+			$cart->product_id = $request->product_id;
+			$cart->save();
+		}
 
         $result["text"] = "Товар успешно добавлен в корзину";
         return json_encode($result);
@@ -106,6 +116,19 @@ class CartController extends Controller
         $cart->delete();
 
         $result["text"] = "Товар успешно удален";
+        return json_encode($result);
+    }
+	
+	
+	//Функция для изменения количества товаров в корзине
+	public function change(Request $request)
+    {
+        $cart = Cart::where("id",$request->product_id)->first();
+		$count = $cart->count;
+		$cart->count = $request->product_count;
+        $cart->save();
+
+        $result["text"] = "Количество товара изменено: " . $request->product_count;
         return json_encode($result);
     }
 }
