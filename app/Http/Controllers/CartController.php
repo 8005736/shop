@@ -24,6 +24,9 @@ class CartController extends Controller
                 $products[$cid]["cart_id"] = $cid;
             }
         }
+		
+		$products = empty($products) ? array() : $products;
+		
         return view('cart',
             [
                 'products' => $products,
