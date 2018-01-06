@@ -120,15 +120,19 @@ body {
         &-title {
             float: left;
             width: 100px;
+            padding: 5px;
         }
         &-price {
             float: left;
             width: 80px;
             text-align: center;
             margin-right: 20px;
+            padding: 5px;
         }
         &-delete {
             .border-radius(4px);
+            padding: 5px;
+            box-sizing: content-box;
             width: 20px;
             height: 20px;
             background: none;
@@ -139,13 +143,15 @@ body {
                 background: lighten(@black, 70%);
             }
         }
-		
-		&-count {
-			display: inline-block;
-		}
-		
-		&-remove {
-			float: right;
-		}
+        &-count {
+            display: inline-block;
+            input {
+                width: 50px;
+                padding: 5px;
+            }
+        }
+        &-remove {
+            float: right;
+        }
     }
 }

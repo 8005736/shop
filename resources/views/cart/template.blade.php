@@ -9,10 +9,10 @@
 		<form action="/cart/change" method="POST">
 			{{ csrf_field() }}
 			<input type="hidden" name="product_id" value="{{ $product->cart_id }}">
-			Кол: <input type="number" name="product_count" style="width: 50px;" value="{{ $product->count }}"/> 
+			Кол: <input type="number" name="product_count" value="{{ $product->count }}"/>
 		</form>
 	</div>
-	
+
 	<form class="cart-item-remove" action="/cart" method="POST">
 		{{ csrf_field() }}
 		<input type="hidden" name="product_id" value="{{ $product->cart_id }}">

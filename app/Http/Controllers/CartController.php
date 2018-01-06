@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cart;
-use App\Product;
+use App\Products;
 
 class CartController extends Controller
 {
@@ -17,19 +17,19 @@ class CartController extends Controller
     {
         $cart = Cart::groupby("product_id")->get();
 		$products = array();
-		
+
         foreach ($cart as $key => $value) {
             $cid = $value->id;
-            if ($product = Product::find($value->product_id)){
+            if ($product = Products::find($value->product_id)){
                 $products[$cid] = $product;
                 // добавляем ключ, чтобы удалять только один товар
                 $products[$cid]["cart_id"] = $cid;
 				$products[$cid]["count"] = $value["count"];
             }
         }
-		
+
 		$products = empty($products) ? array() : $products;
-		
+
         return view('cart',
             [
                 'products' => $products,
@@ -56,18 +56,18 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-		$product = Cart::where("product_id",$request->product_id)->first();
-		
+		$cart = Cart::where("product_id", $request->product_id)->first();
+
 		//Если в корзине уже есть такой товар
-		if ($product) {
-			$count = $product->count;
-			$product->count = $count+1;
-			$product->save();
+		if ($cart) {
+			$count = $cart->count;
+			$cart->count = $count+1;
 		} else {
 			$cart = new Cart();
 			$cart->product_id = $request->product_id;
-			$cart->save();
+			$cart->count = 1;
 		}
+		$cart->save();
 
         $result["text"] = "Товар успешно добавлен в корзину";
         return json_encode($result);
@@ -121,8 +121,8 @@ class CartController extends Controller
         $result["text"] = "Товар успешно удален";
         return json_encode($result);
     }
-	
-	
+
+
 	//Функция для изменения количества товаров в корзине
 	public function change(Request $request)
     {
