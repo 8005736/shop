@@ -155,3 +155,27 @@ body {
         }
     }
 }
+ul.pagination {
+    text-align: center;
+    li {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 10px;
+        border: 1px solid lighten(@black, 20%);
+        a, span{
+            width: 20px;
+            padding: 5px;
+            text-decoration: none;
+            display: block;
+        }
+        &.active span{
+            background: lighten(@black, 70%);
+        }
+        a{
+            &:hover {
+                background: lighten(@black, 70%);
+            }
+
+        }
+    }
+}

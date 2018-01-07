@@ -15,7 +15,7 @@ class ProductController extends Controller
     {
         return view('index',
             [
-                'products' => Products::All(),
+                'products' => Products::paginate(5),
                 'pagetitle' => 'Товары'
             ]
         );
