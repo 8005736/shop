@@ -37,7 +37,8 @@ return [
     [
         'title' => 'Товары',
         'icon'  => 'fa fa-tag',
-        'url'   => route('admin.products'),
+        'model' => \App\Products::class
+
     ],
     // Examples
     // [
