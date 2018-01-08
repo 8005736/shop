@@ -11,3 +11,7 @@ Route::delete('/cart/{id}', 'CartController@destroy');
 Route::resources([
     'products' => 'ProductController',
 ]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
