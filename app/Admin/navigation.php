@@ -33,6 +33,12 @@ return [
         'icon'  => 'fa fa-gear',
         'model' => \App\SiteSetting::class
     ],
+
+    [
+        'title' => 'Товары',
+        'icon'  => 'fa fa-tag',
+        'url'   => route('admin.products'),
+    ],
     // Examples
     // [
     //    'title' => 'Content',
