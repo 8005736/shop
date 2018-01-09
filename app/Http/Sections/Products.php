@@ -41,13 +41,13 @@ class Products extends Section
      */
     public function onDisplay()
     {
-        return AdminDisplay::table()/*->with('users')*/
+        return AdminDisplay::datatables()/*->with('users')*/
             ->setHtmlAttribute('class', 'table-primary')
             ->setColumns(
                 AdminColumn::text('id', '#')->setWidth('30px'),
                 AdminColumn::link('name', 'Название')->setWidth('200px'),
                 AdminColumn::text('price', 'Цена')
-            )->paginate(20);
+            )->paginate(8);
     }
 
     /**

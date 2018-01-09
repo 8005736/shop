@@ -23,6 +23,17 @@ use SleepingOwl\Admin\Navigation\Page;
 
 return [
     [
+        'title' => 'На сайт',
+        'icon'  => 'fa fa-arrows-alt',
+        'url'   => "/",
+    ],
+
+    [
+        'title' => '',
+        'url' => ''
+    ],
+
+    [
         'title' => 'Dashboard',
         'icon'  => 'fa fa-dashboard',
         'url'   => route('admin.dashboard'),
