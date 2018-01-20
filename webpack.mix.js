@@ -11,5 +11,8 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/assets/js/script.js', 'public/js/script.js')
+   // .less('resources/assets/css/__defaults.less', 'public/css/__defaults.css')
+   .less('resources/assets/css/style.less', 'public/css/style.css')
+   .copy('resources/assets/css/jquery.jgrowl.min.css', 'public/css/jquery.jgrowl.min.css')
+   .version();
